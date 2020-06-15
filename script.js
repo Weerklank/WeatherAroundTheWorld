@@ -11,7 +11,7 @@ $(document).ready(function () {
 
         if (isNaN(parseInt(city)) === true) {
 
-            console.log('shit fuck damn')
+
             one = localStorage.getItem('city')
             two = localStorage.getItem('zip')
             window.localStorage.removeItem('zip')
@@ -34,8 +34,6 @@ $(document).ready(function () {
 
         } else if (city.length === 5 && isNaN(parseInt(city)) === false) {
 
-            console.log('damn fuck shit')
-
             one = localStorage.getItem('city')
             two = localStorage.getItem('zip')
             window.localStorage.removeItem('city')
@@ -55,7 +53,6 @@ $(document).ready(function () {
 
             ajaxForcast(settings)
         } else {
-            console.log(one, two)
             if (one === null) {
                 city = two
                 window.localStorage.setItem('zip', city)
@@ -97,7 +94,6 @@ $(document).ready(function () {
                 }
             })
         }).fail(function (response) {
-            console.log(one, two)
             if (one === null) {
                 city = two
                 window.localStorage.setItem('zip', city)
@@ -111,16 +107,14 @@ $(document).ready(function () {
 
     function ajaxForcast(settings) {
         $.ajax(settings).then(function (response) {
-            console.log(response.list);
             let j = 1
             for (let i = 0; i < response.list.length; i++) {
                 if (response.list[i].dt_txt.includes('12:00:00')) {
                     $('#date' + j).text((new Date(response.list[i].dt_txt).toLocaleDateString()))
+                    $('.icon' + j).attr('src','http://openweathermap.org/img/wn/' + response.list[i].weather[0].icon +'@2x.png')
                     $('.temp' + j).text(response.list[i].main.temp)
-                    console.log(response.list[i].main.temp)
                     $('.humid' + j).text(response.list[i].main.humidity)
                     j++
-                    console.log(j)
                 }
             }
             // $('#cityName').text(response.name)
