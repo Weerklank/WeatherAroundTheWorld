@@ -8,7 +8,20 @@ $(document).ready(function () {
 
     $('#button-addon2').on("click", function () {
         let city = input.val()
+        if (history.indexOf(city) === -1) {
+            history.push(city);
+            window.localStorage.setItem("history", JSON.stringify(history));
 
+            addHistory(city)
+        }
+        checkWeather(city)
+    })
+
+    $('.history').on("click", function (e) {
+        checkWeather($(e.target).data('name'))
+    })
+
+    function checkWeather(city) {
         if (isNaN(parseInt(city)) === true) {
 
 
@@ -62,14 +75,14 @@ $(document).ready(function () {
             }
             confirm('Please enter a new city or zip, the one you entered does not exist in the database')
         }
-    })
+    }
 
     function ajaxCurrent(settings) {
         $.ajax(settings).done(function (response) {
             $('#cityName').text(response.name)
             $('#cityCountry').text(response.sys.country)
             $('#cityWeather').text(response.weather[0].description)
-            $('#cityTemp').text(response.main.temp)
+            $('#cityTemp').text(response.main.temp.toFixed())
             $('#cityHumid').text(response.main.humidity)
             $('#cityWind').text(response.wind.speed)
             let lat = response.coord.lat
@@ -111,9 +124,9 @@ $(document).ready(function () {
             for (let i = 0; i < response.list.length; i++) {
                 if (response.list[i].dt_txt.includes('12:00:00')) {
                     $('#date' + j).text((new Date(response.list[i].dt_txt).toLocaleDateString()))
-                    $('.icon' + j).attr('src','http://openweathermap.org/img/wn/' + response.list[i].weather[0].icon +'@2x.png')
-                    $('.temp' + j).text(response.list[i].main.temp)
-                    $('.humid' + j).text(response.list[i].main.humidity)
+                    $('.icon' + j).attr('src', 'http://openweathermap.org/img/wn/' + response.list[i].weather[0].icon + '@2x.png')
+                    $('.temp' + j).text(response.list[i].main.temp.toFixed() + ' °F')
+                    $('.humid' + j).text(response.list[i].main.humidity + '% Humidity')
                     j++
                 }
             }
@@ -121,7 +134,19 @@ $(document).ready(function () {
         })
     }
 
+    function addHistory(x) {
+        var button = $('<li>').addClass("button list-group-item list-group-item-action").text(x).data('name', x)
+        $('.history').append(button)
+    }
+
     function loadCity() {
+        // Slight misnomer, also loads history
+        var history = JSON.parse(window.localStorage.getItem("history"))
+
+        for (var i = 0; i < history.length; i++) {
+            addHistory(history[i]);
+        }
+
         city = localStorage.getItem('city')
         zip = localStorage.getItem('zip')
         if (zip === null) {
