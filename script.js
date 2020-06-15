@@ -142,10 +142,12 @@ $(document).ready(function () {
 
     function loadCity() {
         // Slight misnomer, also loads history
-        var history = JSON.parse(window.localStorage.getItem("history"))
+        history = JSON.parse(window.localStorage.getItem("history"))
 
-        for (var i = 0; i < history.length; i++) {
-            addHistory(history[i]);
+        if (history != null) {
+            for (var i = 0; i < history.length; i++) {
+                addHistory(history[i]);
+            }
         }
 
         city = localStorage.getItem('city')
