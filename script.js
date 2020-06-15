@@ -9,11 +9,13 @@ $(document).ready(function () {
 
     $('#button-addon2').on("click", function () {
         let city = input.val()
-        if (history.indexOf(city) === -1) {
-            history.push(city);
-            window.localStorage.setItem("history", JSON.stringify(history));
+        if (history != null) {
+            if (history.indexOf(city) === -1) {
+                history.push(city);
+                window.localStorage.setItem("history", JSON.stringify(history));
 
-            addHistory(city)
+                addHistory(city)
+            }
         }
         checkWeather(city)
     })
