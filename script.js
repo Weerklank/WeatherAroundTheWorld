@@ -155,7 +155,7 @@ $(document).ready(function () {
         city = localStorage.getItem('city')
         zip = localStorage.getItem('zip')
 
-        if (zip === null && city === null || zip === undefined && city === undefined) {
+        if (zip === null && city === null || zip === 'null' && city === 'null' || zip === undefined && city === undefined) {
             city = 'Portland'
         }
 
