@@ -4,57 +4,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type='text/CSS' src='./style.css'></script>
     <script src="https://use.fontawesome.com/43b057a208.js"></script>
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css'
         integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' crossorigin='anonymous'>
+    <link rel="stylesheet" script type='text/CSS' href='./style.css'></script>
     <title>Document</title>
 </head>
 
 <body>
+    <div clas="container">
+        <div class="row">
+            <aside class="col-lg-3">
+                <form class="form-inline">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Portland | 97035" aria-label="City"
+                            aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                                    class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </aside>
 
-    <form class="form-inline">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Portland | 97035" aria-label="City"
-                aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i>
-                </button>
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-header row justify-content-center">
+                        <h1 id='cityName'></h1>
+                        <h2 id='cityCountry'></h2>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title row justify-content-center" id='cityWeather'></h5>
+                        <div class="row justify-content-center">
+                            <div class='col-auto'>The temperature today is</div>
+                            <div id='cityTemp'></div>
+                            <div class='col-sm-auto'>°F</div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class='col-sm-auto'>The humidity today is</div>
+                            <div id='cityHumid'></div>
+                            <div class='col-sm-auto'>%</div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class='col-sm-auto'>The wind speed today is</div>
+                            <div id='cityWind'></div>
+                            <div class='col-sm-auto'>MPH</div>
+                        </div>
+                        <div class="row justify-content-center" id='UV'>
+                            <div class='col-sm-auto'>The UV Index today is</div>
+                            <div id='cityUV'></div>
+                            <div class='col-sm-auto'></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto">
+                        <div class="card">
+                            <div class="card-header" id="date1">
+                                
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="icon1"></li>
+                                <li class="temp1"></li>
+                                <li class="humid1"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="card">
+                            <div class="card-header" id="date2">
+                                
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="icon2"></li>
+                                <li class="temp2"></li>
+                                <li class="humid2"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="card">
+                            <div class="card-header" id="date3">
+                                
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="icon3"></li>
+                                <li class="temp3"></li>
+                                <li class="humid3"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="card">
+                            <div class="card-header" id="date4">
+                                
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="icon4"></li>
+                                <li class="temp4"></li>
+                                <li class="humid4"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="card">
+                            <div class="card-header" id="date5">
+                                
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="icon5"></li>
+                                <li class="temp5"></li>
+                                <li class="humid5"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
             </div>
-        </div>
-    </form>
 
-    <div class="card">
-        <div class="card-header row justify-content-center">
-            <h1 id='cityName'></h1>
-            <h2 id='cityCountry'></h2>
-        </div>
-        <div class="card-body">
-            <h5 class="card-title row justify-content-center" id='cityWeather'></h5>
-            <div class="row justify-content-center">
-                <div class='col-auto'>The temperature today is</div>
-                <div id='cityTemp'></div>
-                <div class='col-sm-auto'>°F</div>
-            </div>
-            <div class="row justify-content-center">
-                <div class='col-sm-auto'>The humidity today is</div>
-                <div id='cityHumid'></div>
-                <div class='col-sm-auto'>%</div>
-            </div>
-            <div class="row justify-content-center">
-                <div class='col-sm-auto'>The wind speed today is</div>
-                <div id='cityWind'></div>
-                <div class='col-sm-auto'>MPH</div>
-            </div>
-            <div class="row justify-content-center" id='UV'>
-                <div class='col-sm-auto'>The UV Index today is</div>
-                <div id='cityUV'></div>
-                <div class='col-sm-auto'></div>
-            </div>
         </div>
     </div>
+    </div>
 
-    
+
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type='text/javascript' src="./script.js"></script>
