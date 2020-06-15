@@ -154,6 +154,11 @@ $(document).ready(function () {
 
         city = localStorage.getItem('city')
         zip = localStorage.getItem('zip')
+
+        if (zip === null && city === null) {
+            city = 'Portland'
+        }
+
         if (zip === null) {
             let settings = {
                 "url": 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=414413edc95ac55baac0a67078ade8d2&units=imperial',
@@ -166,7 +171,8 @@ $(document).ready(function () {
             };
 
             ajaxForcast(settings)
-        } else if (city === null) {
+        } 
+        else if (city === null) {
             city = zip
             let settings = {
                 "url": 'https://api.openweathermap.org/data/2.5/weather?zip=' + city + '&appid=414413edc95ac55baac0a67078ade8d2&units=imperial',
