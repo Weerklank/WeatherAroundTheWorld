@@ -3,6 +3,7 @@ $(document).ready(function () {
     let input = $('.form-control')
     let one = null
     let two = null
+    let history = ""
 
     loadCity()
 
