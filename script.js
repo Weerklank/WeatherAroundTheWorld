@@ -3,11 +3,12 @@ $(document).ready(function () {
     let input = $('.form-control')
     let one = null
     let two = null
-    let history = ""
+    let history = []
 
     loadCity()
 
-    $('#button-addon2').on("click", function () {
+    $('#button-addon2').on("click", function (e) {
+        e.preventDefault()
         let city = input.val()
         if (history != null) {
             if (history.indexOf(city) === -1) {
@@ -127,7 +128,7 @@ $(document).ready(function () {
             for (let i = 0; i < response.list.length; i++) {
                 if (response.list[i].dt_txt.includes('12:00:00')) {
                     $('#date' + j).text((new Date(response.list[i].dt_txt).toLocaleDateString()))
-                    $('.icon' + j).attr('src', 'http://openweathermap.org/img/wn/' + response.list[i].weather[0].icon + '@2x.png')
+                    $('.icon' + j).attr('src', 'https://openweathermap.org/img/wn/' + response.list[i].weather[0].icon + '@2x.png')
                     $('.temp' + j).text(response.list[i].main.temp.toFixed() + ' °F')
                     $('.humid' + j).text(response.list[i].main.humidity + '% Humidity')
                     j++
@@ -146,7 +147,7 @@ $(document).ready(function () {
         // Slight misnomer, also loads history
         history = JSON.parse(window.localStorage.getItem("history"))
 
-        if (history != null) {
+        if (history != []) {
             for (var i = 0; i < history.length; i++) {
                 addHistory(history[i]);
             }
@@ -155,7 +156,7 @@ $(document).ready(function () {
         city = localStorage.getItem('city')
         zip = localStorage.getItem('zip')
 
-        if (zip === null && city === null || zip === 'null' && city === 'null' || zip === undefined && city === undefined){
+        if (zip === null && city === null || zip === 'null' && city === 'null' || zip === undefined && city === undefined) {
             city = 'Portland'
         }
 
@@ -171,8 +172,7 @@ $(document).ready(function () {
             };
 
             ajaxForcast(settings)
-        } 
-        else if (city === null) {
+        } else if (city === null) {
             city = zip
             let settings = {
                 "url": 'https://api.openweathermap.org/data/2.5/weather?zip=' + city + '&appid=414413edc95ac55baac0a67078ade8d2&units=imperial',
