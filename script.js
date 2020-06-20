@@ -147,7 +147,7 @@ $(document).ready(function () {
         // Slight misnomer, also loads history
         history = JSON.parse(window.localStorage.getItem("history"))
 
-        if (history != []) {
+        if (history != null) {
             for (var i = 0; i < history.length; i++) {
                 addHistory(history[i]);
             }
