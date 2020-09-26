@@ -9,8 +9,9 @@ $(document).ready(function () {
 
     $('#button-addon2').on("click", function (e) {
         e.preventDefault()
+        console.log(history)
         let city = input.val()
-        if (history != null) {
+        if (history !== null) {
             if (history.indexOf(city) === -1) {
                 history.push(city);
                 window.localStorage.setItem("history", JSON.stringify(history));
@@ -22,6 +23,7 @@ $(document).ready(function () {
     })
 
     $('.history').on("click", function (e) {
+        console.log("history")
         checkWeather($(e.target).data('name'))
     })
 
