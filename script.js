@@ -1,36 +1,33 @@
 $(document).ready(function () {
 
-    let input = $('.form-control')
+    let input = $('#cityInput')
     let one = null
     let two = null
     let history = []
 
     loadCity()
 
+    $('#button-delete').on("click", function (e) {
+        e.preventDefault()
+        localStorage.removeItem("history")
+        $(".list-group-item").remove()
+        history = []
+    })
+
+
     $('#button-addon2').on("click", function (e) {
         e.preventDefault()
         console.log(history)
         let city = input.val()
-        if (history !== null) {
-            if (history.indexOf(city) === -1) {
-                history.push(city);
-                window.localStorage.setItem("history", JSON.stringify(history));
-
-                addHistory(city)
-            }
-        }
         checkWeather(city)
     })
 
     $('.history').on("click", function (e) {
-        console.log("history")
         checkWeather($(e.target).data('name'))
     })
 
     function checkWeather(city) {
         if (isNaN(parseInt(city)) === true) {
-
-
             one = localStorage.getItem('city')
             two = localStorage.getItem('zip')
             window.localStorage.removeItem('zip')
@@ -52,7 +49,6 @@ $(document).ready(function () {
 
 
         } else if (city.length === 5 && isNaN(parseInt(city)) === false) {
-
             one = localStorage.getItem('city')
             two = localStorage.getItem('zip')
             window.localStorage.removeItem('city')
@@ -93,6 +89,22 @@ $(document).ready(function () {
             $('#cityWind').text(response.wind.speed)
             let lat = response.coord.lat
             let lon = response.coord.lon
+
+            if (history !== null) {
+                if (history.indexOf(response.name) === -1) {
+                    history.push(response.name);
+                    window.localStorage.setItem("history", JSON.stringify(history));
+    
+                    addHistory(response.name)
+                }
+            }
+            else {
+                console.log(response.name)
+                history = [response.name];
+                window.localStorage.setItem("history", JSON.stringify(history));
+    
+                addHistory(response.name)
+            }
 
             settings = {
                 "url": 'https://api.openweathermap.org/data/2.5/uvi?appid=414413edc95ac55baac0a67078ade8d2&lat=' + lat + '&lon=' + lon,
@@ -141,7 +153,7 @@ $(document).ready(function () {
     }
 
     function addHistory(x) {
-        var button = $('<li>').addClass("button list-group-item list-group-item-action").text(x).data('name', x)
+        var button = $('<li>').addClass(`${x} button list-group-item list-group-item-action`).text(x).data('name', x)
         $('.history').append(button)
     }
 
