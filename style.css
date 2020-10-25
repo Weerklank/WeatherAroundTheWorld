@@ -1,4 +1,45 @@
+body {
+    background-color: #7593d4;
+}
+
 ul {
     list-style-type: none;
     text-align: center;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+    padding-top: 5%;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+    padding-top: 5%;
+}
+
+.weather {
+    margin: auto;
+    padding-top: 5%;
+    padding-right:5%;
+}
+
+.btn {
+    background-color: #d2ddf5;
+}
+
+.card {
+    background-image: linear-gradient(#d2ddf5,#7593d4);
+    background-size: 120% 110%;
+}
+
+.button {
+    background-color: #d2ddf5;
 }
